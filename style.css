@@ -1,0 +1,78 @@
+/*
+Theme Name: Let's Explore NI
+Theme URI: https://letsexploreni.co.uk
+Author: Let's Explore NI
+Author URI: https://letsexploreni.co.uk
+Description: Premium custom WordPress theme for Let's Explore NI campervan rentals with Booqable integration.
+Version: 1.0.0
+Requires at least: 6.6
+Tested up to: 6.6
+Requires PHP: 8.2
+License: GPL-2.0-or-later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: lets-explore-ni
+Tags: campervan, rental, travel, booqable, full-site-editing
+*/
+
+:root{
+    --primary:#214D3A;
+    --secondary:#4E8A68;
+    --accent:#C9A35C;
+    --cream:#F8F5EF;
+    --dark:#2B2B2B;
+    --white:#ffffff;
+
+    --radius:16px;
+
+    --container:1280px;
+
+    --shadow:0 20px 40px rgba(0,0,0,.08);
+
+    --transition:.3s ease;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:Inter,sans-serif;
+
+    color:var(--dark);
+
+    background:var(--cream);
+
+    line-height:1.6;
+}
+
+img{
+
+    max-width:100%;
+
+    height:auto;
+
+    display:block;
+}
+
+a{
+
+    color:inherit;
+
+    text-decoration:none;
+
+    transition:var(--transition);
+}
+
+.container{
+
+    width:min(92%,var(--container));
+
+    margin:auto;
+}
