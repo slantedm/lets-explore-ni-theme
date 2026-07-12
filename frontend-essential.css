@@ -1,0 +1,43 @@
+name: Publish theme release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Build installable theme ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          THEME_SLUG="lets-explore-ni-theme"
+          BUILD_DIR="$RUNNER_TEMP/$THEME_SLUG"
+          mkdir -p "$BUILD_DIR"
+          rsync -a ./ "$BUILD_DIR/" \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='.gitignore' \
+            --exclude='README.md' \
+            --exclude='CONTRIBUTING.md' \
+            --exclude='*.zip' \
+            --exclude='node_modules/' \
+            --exclude='vendor/'
+          cd "$RUNNER_TEMP"
+          zip -qr "$GITHUB_WORKSPACE/$THEME_SLUG.zip" "$THEME_SLUG"
+          unzip -t "$GITHUB_WORKSPACE/$THEME_SLUG.zip"
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: lets-explore-ni-theme.zip

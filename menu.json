@@ -1,0 +1,71 @@
+name: Validate and build theme
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-and-package:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+
+      - name: Check PHP syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r -d '' file; do
+            php -l "$file"
+          done < <(find . -type f -name '*.php' -not -path './vendor/*' -print0)
+
+      - name: Validate theme JSON
+        run: php -r '$json = json_decode(file_get_contents("theme.json"), true); if (json_last_error() !== JSON_ERROR_NONE) { fwrite(STDERR, json_last_error_msg() . PHP_EOL); exit(1); }'
+
+      - name: Verify required theme files
+        shell: bash
+        run: |
+          test -f style.css
+          test -f functions.php
+          test -f theme.json
+          test -f templates/index.html
+
+      - name: Build installable theme ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          THEME_SLUG="lets-explore-ni-theme"
+          BUILD_DIR="$RUNNER_TEMP/$THEME_SLUG"
+          mkdir -p "$BUILD_DIR"
+          rsync -a ./ "$BUILD_DIR/" \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='.gitignore' \
+            --exclude='README.md' \
+            --exclude='CONTRIBUTING.md' \
+            --exclude='*.zip' \
+            --exclude='node_modules/' \
+            --exclude='vendor/'
+          cd "$RUNNER_TEMP"
+          zip -qr "$GITHUB_WORKSPACE/$THEME_SLUG.zip" "$THEME_SLUG"
+          unzip -t "$GITHUB_WORKSPACE/$THEME_SLUG.zip"
+
+      - name: Upload installable theme
+        uses: actions/upload-artifact@v4
+        with:
+          name: lets-explore-ni-theme
+          path: lets-explore-ni-theme.zip
+          if-no-files-found: error
+          retention-days: 30

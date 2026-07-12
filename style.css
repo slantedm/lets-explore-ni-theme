@@ -1,78 +1,163 @@
 /*
-Theme Name: Let's Explore NI
-Theme URI: https://letsexploreni.co.uk
-Author: Let's Explore NI
-Author URI: https://letsexploreni.co.uk
-Description: Premium custom WordPress theme for Let's Explore NI campervan rentals with Booqable integration.
-Version: 1.0.0
-Requires at least: 6.6
+Theme Name: Let’s Explore NI – Kamperven Edition
+Description: A customised full-site editing WordPress theme for Let’s Explore NI campervan hire, with Booqable-ready booking calls to action and Northern Ireland focused branding.
+Author: Let’s Explore NI
+Author URI: https://letsexploreni.co.uk/
+Theme URI: https://letsexploreni.co.uk/
+Version: 1.7.0
+Requires at least: 6.2
 Tested up to: 6.6
-Requires PHP: 8.2
-License: GPL-2.0-or-later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Requires PHP: 7.4
+License: GNU General Public License v3 or later.
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Text Domain: lets-explore-ni
-Tags: campervan, rental, travel, booqable, full-site-editing
+Tags: block-patterns,custom-logo,custom-menu,editor-style,featured-images,full-site-editing
 */
 
 :root{
-    --primary:#214D3A;
-    --secondary:#4E8A68;
-    --accent:#C9A35C;
-    --cream:#F8F5EF;
-    --dark:#2B2B2B;
-    --white:#ffffff;
-
-    --radius:16px;
-
-    --container:1280px;
-
-    --shadow:0 20px 40px rgba(0,0,0,.08);
-
-    --transition:.3s ease;
+    
+}
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container > .block-library-block__reusable-block-container {
+    max-width: 100%;
 }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+/* Let’s Explore NI brand layer */
+:root {
+  --leni-forest: #254f43;
+  --leni-moss: #517a63;
+  --leni-sand: #e4d6b8;
+  --leni-cream: #f8f5ee;
+  --leni-ink: #202722;
+  --leni-gold: #d89a3d;
+  --leni-radius: 12px;
+  --leni-shadow: 0 18px 50px rgba(32, 39, 34, 0.12);
+}
+html { scroll-behavior: smooth; }
+body { background: var(--leni-cream); color: var(--leni-ink); }
+a { text-underline-offset: .18em; }
+.wp-site-blocks { overflow: hidden; }
+.wp-block-button__link,
+.guten-button {
+  border-radius: var(--leni-radius) !important;
+  font-weight: 700;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+.wp-block-button__link:hover,
+.guten-button:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(32,39,34,.16); }
+.leni-booking-cta a,
+a[href*="booqable.com"] { background: var(--leni-gold) !important; color: #172019 !important; }
+.leni-card { border-radius: var(--leni-radius); box-shadow: var(--leni-shadow); overflow: hidden; }
+.leni-eyebrow { letter-spacing: .12em; text-transform: uppercase; font-weight: 700; color: var(--leni-moss); }
+@media (max-width: 781px) {
+  .wp-site-blocks { --wp--style--root--padding-right: 20px; --wp--style--root--padding-left: 20px; }
 }
 
-html{
-    scroll-behavior:smooth;
+
+/* Phase 2: native block homepage */
+.leni-header { position: relative; z-index: 50; box-shadow: 0 4px 22px rgba(32,39,34,.08); }
+.leni-header .wp-block-site-logo img { max-height: 68px; width: auto; }
+.leni-header .wp-block-navigation-item__content { color: var(--leni-ink); text-decoration: none; }
+.leni-header .wp-block-navigation-item__content:hover { color: var(--leni-moss); }
+.leni-hero .wp-block-cover__inner-container { width: 100%; }
+.leni-hero .wp-block-group { margin-left: 0; }
+.leni-eyebrow-light { color: #fff; }
+.leni-trust-row { color: #fff; gap: 22px; margin-top: 24px; font-weight: 650; }
+.leni-trust-row p { margin: 0; }
+.leni-image img { border-radius: 18px; box-shadow: var(--leni-shadow); min-height: 440px; object-fit: cover; }
+.leni-section h2, .leni-intro h2 { font-size: clamp(2.2rem,4vw,3.6rem); line-height: 1.1; margin-top: 8px; }
+.leni-fleet-card { height: 100%; }
+.leni-fleet-card figure { margin: 0; }
+.leni-fleet-card img { aspect-ratio: 4/3; object-fit: cover; width: 100%; }
+.leni-card-body { padding: 26px; }
+.leni-card-body h3 { margin-top: 0; font-size: 1.55rem; }
+.leni-specs { color: var(--leni-moss); font-weight: 700; font-size: .95rem; }
+.leni-route-card { height: 100%; padding: 32px; border: 1px solid rgba(37,79,67,.18); border-radius: 16px; background: #fff; }
+.leni-route-card span { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--leni-sand); color: var(--leni-forest); font-weight: 800; }
+.leni-route-card h3 { font-size: 1.5rem; margin-bottom: 10px; }
+.leni-step { padding: 12px 22px; }
+.leni-step strong { display: inline-grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--leni-gold); color: var(--leni-ink); font-size: 1.25rem; }
+.leni-step h3 { color: #fff; font-size: 1.4rem; }
+.leni-step p { color: rgba(255,255,255,.82); }
+.leni-check-list { list-style: none; padding-left: 0; font-size: 1.1rem; }
+.leni-check-list li { position: relative; padding: 12px 0 12px 36px; border-bottom: 1px solid rgba(37,79,67,.14); }
+.leni-check-list li::before { content: "✓"; position: absolute; left: 0; color: var(--leni-moss); font-weight: 900; }
+.leni-faq details { background: #fff; border-radius: 12px; margin: 14px 0; padding: 20px 24px; box-shadow: 0 5px 20px rgba(32,39,34,.06); }
+.leni-faq summary { cursor: pointer; font-weight: 750; font-size: 1.08rem; }
+.leni-footer a { color: #fff; }
+.leni-footer ul { padding-left: 1.1rem; }
+.leni-final-cta .wp-block-cover__inner-container { width: 100%; }
+@media (max-width: 900px) {
+  .leni-header .wp-block-buttons { display: none; }
+  .leni-hero { min-height: 620px !important; }
+  .leni-image img { min-height: 320px; }
+}
+@media (max-width: 600px) {
+  .leni-header { padding-left: 16px !important; padding-right: 16px !important; }
+  .leni-header .wp-block-site-logo img { max-width: 145px; }
+  .leni-hero { min-height: 660px !important; }
+  .leni-trust-row { display: block; }
+  .leni-trust-row p { margin: 8px 0; }
+  .leni-section, .leni-intro, .leni-steps, .leni-faq { padding-top: 64px !important; padding-bottom: 64px !important; }
 }
 
-body{
-
-    font-family:Inter,sans-serif;
-
-    color:var(--dark);
-
-    background:var(--cream);
-
-    line-height:1.6;
+/* Phase 3: fleet and individual campervan pages */
+.leni-fleet-listing { height: 100%; }
+.leni-fleet-listing .wp-block-post-featured-image { margin: 0; }
+.leni-fleet-listing .wp-block-post-featured-image img,
+.leni-vehicle-image img { width: 100%; object-fit: cover; }
+.leni-fleet-listing .wp-block-post-title a { color: var(--leni-ink); text-decoration: none; }
+.leni-fleet-listing .wp-block-post-title a:hover { color: var(--leni-moss); }
+.leni-comparison-table { overflow-x: auto; margin-top: 34px; }
+.leni-comparison-table table { min-width: 760px; background: #fff; border-radius: 14px; overflow: hidden; }
+.leni-comparison-table th { background: var(--leni-forest); color: #fff; }
+.leni-comparison-table td, .leni-comparison-table th { padding: 15px 16px; text-align: center; }
+.leni-comparison-table td:first-child, .leni-comparison-table th:first-child { text-align: left; font-weight: 750; }
+.leni-single-vehicle-image img { border-radius: 18px; box-shadow: var(--leni-shadow); object-fit: cover; width: 100%; }
+.leni-booking-panel { position: sticky; top: 28px; border-radius: 18px; box-shadow: var(--leni-shadow); border: 1px solid rgba(37,79,67,.12); }
+.leni-booking-panel .wp-block-buttons { width: 100%; }
+.leni-mini-trust { line-height: 2; font-weight: 650; color: var(--leni-moss); }
+.leni-vehicle-page .wp-block-post-content h2 { margin-top: 2.2em; }
+.leni-vehicle-faq details { background: #fff; padding: 20px 24px; border-radius: 12px; margin: 14px 0; }
+.leni-sticky-booking { position: sticky; bottom: 0; z-index: 45; padding: 12px 24px; box-shadow: 0 -8px 28px rgba(32,39,34,.15); }
+.leni-sticky-booking p { margin: 0; }
+@media (max-width: 781px) {
+  .leni-booking-panel { position: static; margin-top: 28px; }
+  .leni-sticky-booking .wp-block-group { gap: 12px; }
+  .leni-sticky-booking p { display: none; }
+  .leni-sticky-booking .wp-block-button { width: 100%; }
+  .leni-sticky-booking .wp-block-button__link { width: 100%; }
 }
 
-img{
-
-    max-width:100%;
-
-    height:auto;
-
-    display:block;
+/* Phase 4: road-trip guides, campsite directory and editorial foundations */
+.leni-directory-hero .wp-block-cover__inner-container { width: 100%; }
+.leni-guide-card { height: 100%; }
+.leni-guide-card .wp-block-post-featured-image { margin: 0; }
+.leni-guide-card .wp-block-post-featured-image img { width: 100%; object-fit: cover; }
+.leni-guide-card .wp-block-post-title a { color: var(--leni-ink); text-decoration: none; }
+.leni-guide-card .wp-block-post-title a:hover { color: var(--leni-moss); }
+.leni-guide-region { margin-bottom: 8px; font-size: .82rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.leni-guide-region a { color: var(--leni-moss); text-decoration: none; }
+.leni-guide-card .wp-block-read-more { color: var(--leni-forest); font-weight: 800; text-decoration: none; }
+.leni-guide-featured img { width: 100%; max-height: 560px; object-fit: cover; border-radius: 18px; box-shadow: var(--leni-shadow); }
+.leni-guide-single .wp-block-post-excerpt { max-width: 780px; }
+.leni-guide-single .wp-block-columns { margin-top: 52px; }
+.leni-trip-facts { padding: 18px 22px; margin: 28px 0; border-radius: 12px; background: var(--leni-sand); gap: 28px; }
+.leni-trip-facts p { margin: 0; }
+.leni-itinerary-list { counter-reset: itinerary; list-style: none; padding-left: 0; }
+.leni-itinerary-list li { position: relative; min-height: 48px; margin: 0 0 16px; padding: 12px 14px 12px 62px; border-radius: 12px; background: #fff; box-shadow: 0 4px 18px rgba(32,39,34,.06); }
+.leni-itinerary-list li::before { counter-increment: itinerary; content: counter(itinerary); position: absolute; left: 12px; top: 8px; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: var(--leni-forest); color: #fff; font-weight: 800; }
+.leni-campsite-hero .leni-eyebrow-light { color: var(--leni-sand); }
+@media (max-width: 781px) {
+  .leni-guide-single .wp-block-columns { margin-top: 34px; }
+  .leni-trip-facts { display: block; }
+  .leni-trip-facts p + p { margin-top: 8px; }
 }
 
-a{
 
-    color:inherit;
-
-    text-decoration:none;
-
-    transition:var(--transition);
-}
-
-.container{
-
-    width:min(92%,var(--container));
-
-    margin:auto;
-}
+/* Phase 5: enquiries, customer stories, accessibility and launch polish */
+.leni-skip-link{position:fixed;left:16px;top:-80px;z-index:99999;background:#fff;color:var(--leni-ink);padding:12px 18px;border-radius:8px;box-shadow:var(--leni-shadow);font-weight:800}.leni-skip-link:focus{top:16px}
+:where(a,button,input,textarea,select,summary):focus-visible{outline:3px solid var(--leni-gold);outline-offset:3px}
+.leni-reviews{padding:90px 24px}.leni-review-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:42px}.leni-review-card,.leni-review-empty{background:#fff;border-radius:16px;padding:30px;box-shadow:var(--leni-shadow)}.leni-review-card blockquote{margin:16px 0;font-size:1.1rem;line-height:1.65}.leni-stars{color:#a86400;letter-spacing:.14em;font-size:1.05rem}.leni-review-empty{text-align:center;max-width:720px;margin:38px auto 0}
+.leni-enquiry-form{max-width:900px;margin:34px 0;background:#fff;padding:34px;border-radius:16px;box-shadow:var(--leni-shadow)}.leni-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 22px}.leni-enquiry-form label{display:block;font-weight:750;margin-bottom:8px}.leni-enquiry-form input,.leni-enquiry-form textarea{box-sizing:border-box;width:100%;border:1px solid rgba(37,79,67,.35);border-radius:10px;background:#fff;padding:13px 14px;font:inherit}.leni-enquiry-form button{border:0;border-radius:12px;background:var(--leni-gold);color:#172019;padding:14px 22px;font:inherit;font-weight:800;cursor:pointer}.leni-form-privacy{font-size:.88rem}.leni-form-notice{max-width:900px;padding:15px 18px;border-radius:10px;margin:22px 0}.leni-form-notice.is-success{background:#e4f2e8}.leni-form-notice.is-error{background:#f8e4e1}.leni-honeypot{position:absolute!important;left:-9999px!important}
+@media(max-width:781px){.leni-review-grid,.leni-form-grid{grid-template-columns:1fr}.leni-reviews{padding:64px 20px}.leni-enquiry-form{padding:22px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
